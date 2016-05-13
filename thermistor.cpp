@@ -27,16 +27,27 @@
  *
  * Based on procedure explained by Adafruit:
  * https://learn.adafruit.com/thermistor/using-a-thermistor
+ *
+ * This library works only with the following circuit topology
+ *
+ * Vcc---NTC---ADC---SERIES_RESISTOR---GND
  */
 
 #include "thermistor.h"
-    
+#include "HardwareSerial.h"
 // Temperature for nominal resistance (almost always 25 C)
 #define TEMPERATURENOMINAL 25
 
 // Number of ADC samples
 #define NUMSAMPLES         5 
 
+// ADC resolution
+#ifdef PANSTAMP_NRG
+#define ADC_RESOLUTION 0xFFF
+#else
+#define ADC_RESOLUTION 1023
+#endif
+#define VERBOSE_SENSOR_ENABLED 1
 /**
  * THERMISTOR
  * 
@@ -85,7 +96,7 @@ int THERMISTOR::read(void)
   #endif
  
   // convert the value to resistance
-  average = 0xFFF / average - 1;
+  average = ADC_RESOLUTION / average - 1;
   average = serialResistance * average;
 
   #ifdef VERBOSE_SENSOR_ENABLED
@@ -95,7 +106,7 @@ int THERMISTOR::read(void)
  
   float steinhart;
   steinhart = average / nominalResistance;     // (R/Ro)
-  #if defined(__cc430x513x)
+  #ifdef PANSTAMP_NRG
   steinhart = logf(steinhart);                 // ln(R/Ro)
   #else
   steinhart = log(steinhart);                  // ln(R/Ro)
