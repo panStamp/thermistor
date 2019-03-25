@@ -42,7 +42,7 @@
 #define NUMSAMPLES         5 
 
 // ADC resolution
-#ifdef PANSTAMP_NRG
+#if defined(PANSTAMP_NRG) || defined(ESP_PLATFORM)
 #define ADC_RESOLUTION 0xFFF
 #else
 #define ADC_RESOLUTION 1023
@@ -79,7 +79,9 @@ int THERMISTOR::read(void)
   uint16_t sample;
   float average = 0;
 
+  #ifndef ESP_PLATFORM
   analogReference(DEFAULT);
+  #endif
 
   // take N samples in a row, with a slight delay
   for (i=0; i< NUMSAMPLES; i++)
