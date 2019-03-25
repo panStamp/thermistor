@@ -1,0 +1,12 @@
+{
+  "name": "thermistor",
+  "keywords": "seonsor, thermistor, ntc, themperature",
+  "description": "Simple thermistor library for NTC's. Steinhart-Hart equation approach.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/panStamp/thermistor.git"
+  },
+  "version": "1.0.2",
+  "frameworks": "arduino",
+  "platforms": "*"
+}

@@ -5,10 +5,10 @@
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
-THERMISTOR  KEYWORD1
+THERMISTOR	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-read KEYWORD2
+read	KEYWORD2
 
