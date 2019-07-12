@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/panStamp/thermistor.git"
   },
-  "version": "1.0.2",
+  "version": "1.0.3",
   "frameworks": "arduino",
   "platforms": "*"
 }
